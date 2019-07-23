@@ -29,12 +29,12 @@ public class MyHashMap<K, V> {
     private float loadFactor = 0.75f;
 
     /**
-     * resize阈值, 通常为2的N次幂
+     * resize阈值, 通常为2的指数幂
      */
     private int threshold;
 
     /**
-     * map当前大小
+     * map当前大小(当前map中的键值对个数)
      */
     private int size;
 
@@ -47,24 +47,30 @@ public class MyHashMap<K, V> {
 
     /**
      * 指定容量的构造方法
+     * @param capacity
      */
     public MyHashMap(int capacity) {
     }
 
     /**
      * 指定容量与负载因子的构造方法
+     *
+     * @param capacity
+     * @param loadFactor
      */
     public MyHashMap(int capacity, float loadFactor) {
         this.loadFactor = loadFactor;
-        this.threshold = this.getSize(capacity);
+        this.threshold = this.getThreshold(capacity);
     }
 
-    private static final int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-    }
-
-    private static int getSize(int capacity) {
+    /**
+     * 获取触发resize的阈值
+     *
+     * @param capacity
+     * @return
+     */
+    private static int getThreshold(int capacity) {
+        // 位运算, 取距离capacity最近的2的指数幂
         int n = capacity - 1;
         n |= n >>> 1;
         n |= n >>> 2;
@@ -74,23 +80,65 @@ public class MyHashMap<K, V> {
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
-    private static int getIndex(int h, int length) {
-        return h & (length-1);
+    /**
+     * 对key进行hash
+     *
+     * @param key
+     * @return hash值
+     */
+    private static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
+    /**
+     * 对h进行取模运算, 获取元素所在位置
+     *
+     * @param h
+     * @param length
+     * @return 元素所在位置
+     */
+    private static int getIndex(int h, int length) {
+        return h & (length - 1);
+    }
+
+    /**
+     * 放入键值对
+     *
+     * @param key
+     * @param value
+     */
     public void put(K key, V value) {
 
     }
 
+    /**
+     * 根据key值获取value
+     *
+     * @param key
+     * @return value值
+     */
     public V get(K key) {
         return null;
     }
 
+    /**
+     * 根据key值删除键值对
+     *
+     * @param key
+     * @return value值
+     */
     public V remove(K key) {
         return null;
     }
 
-    public boolean containsKey() {
+    /**
+     * 判断key值是否存在
+     *
+     * @param key
+     * @return true or false
+     */
+    public boolean containsKey(K key) {
         return false;
     }
 
@@ -99,6 +147,7 @@ public class MyHashMap<K, V> {
         V value;
         int hash;
         Entry<K, V> next;
+
         public K getKey() {
             return key;
         }
