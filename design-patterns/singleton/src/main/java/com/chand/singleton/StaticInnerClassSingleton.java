@@ -5,7 +5,7 @@ package com.chand.singleton;
  *
  * @author Chand
  * @Date: 2019-07-12 17:03:15
- **/
+ */
 public class StaticInnerClassSingleton {
 
     /**

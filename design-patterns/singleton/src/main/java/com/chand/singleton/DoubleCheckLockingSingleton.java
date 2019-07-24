@@ -5,7 +5,7 @@ package com.chand.singleton;
  *
  * @author Chand
  * @Date: 2019-07-12 14:56:41
- **/
+ */
 public class DoubleCheckLockingSingleton {
 
     /**

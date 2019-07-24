@@ -5,7 +5,7 @@ package com.chand.singleton;
  *
  * @author Chand
  * @Date: 2019-07-12 13:56:07
- **/
+ */
 public class LazySingleton {
 
     /**

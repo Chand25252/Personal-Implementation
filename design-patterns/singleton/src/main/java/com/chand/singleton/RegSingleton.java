@@ -8,7 +8,7 @@ import java.util.Map;
  *
  * @author Chand
  * @Date: 2019-07-12 22:01:09
- **/
+ */
 public class RegSingleton {
 
     /**

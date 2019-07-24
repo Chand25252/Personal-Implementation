@@ -5,7 +5,7 @@ package com.chand.singleton;
  *
  * @author Chand
  * @Date: 2019-07-12 17:03:04
- **/
+ */
 public enum EnumSingleton {
 
     INSTANCE;

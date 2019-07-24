@@ -1,5 +1,12 @@
 package com.chand.map;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import static java.lang.Float.NaN;
 
 /**
@@ -7,7 +14,7 @@ import static java.lang.Float.NaN;
  *
  * @author Chand
  * @Date: 2019/7/22 13:47
- **/
+ */
 public class App {
 
 
@@ -17,9 +24,19 @@ public class App {
 
     public static void main(String[] args) {
 
-        float f = NaN;
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 
-        System.out.println(f!=f);
+        List<Character> mappers = list.stream().map(num -> {
+            char ch = (char) ('a' + num);
+            return ch;
+        }).collect(Collectors.toList());
+
+        int sum = list.stream().reduce((x, y) -> x + y).get();
+
+        mappers.forEach(num -> System.out.println(num));
+
+        System.out.println(sum);
+
 
 //        int n = capacity - 1;
 //        n |= n >>> 1;

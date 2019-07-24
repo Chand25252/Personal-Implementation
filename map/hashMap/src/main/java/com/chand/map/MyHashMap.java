@@ -5,7 +5,7 @@ package com.chand.map;
  *
  * @author Chand
  * @Date: 2019-07-19 16:34:47
- **/
+ */
 public class MyHashMap<K, V> {
 
     /**
@@ -47,6 +47,7 @@ public class MyHashMap<K, V> {
 
     /**
      * 指定容量的构造方法
+     *
      * @param capacity
      */
     public MyHashMap(int capacity) {
@@ -86,7 +87,7 @@ public class MyHashMap<K, V> {
      * @param key
      * @return hash值
      */
-    private static final int hash(Object key) {
+    private final int hash(Object key) {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
@@ -98,8 +99,12 @@ public class MyHashMap<K, V> {
      * @param length
      * @return 元素所在位置
      */
-    private static int getIndex(int h, int length) {
+    private int getIndex(int h, int length) {
         return h & (length - 1);
+    }
+
+    private int resize() {
+        return 16;
     }
 
     /**
@@ -108,8 +113,24 @@ public class MyHashMap<K, V> {
      * @param key
      * @param value
      */
-    public void put(K key, V value) {
+    public V put(K key, V value) {
+        if (table == null || table.length == 0) {
 
+        }
+        int hash = hash(key.hashCode());
+        int i = getIndex(hash, table.length);
+        //遍历链表
+        for (Entry<K, V> e = table[i]; e != null; e = e.next) {
+            Object k;
+            //如果key在链表中已存在，则替换为新value
+            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+                V oldValue = e.value;
+                e.value = value;
+                return oldValue;
+            }
+        }
+//        addEntry(hash, key, value, i);
+        return null;
     }
 
     /**
@@ -148,12 +169,24 @@ public class MyHashMap<K, V> {
         int hash;
         Entry<K, V> next;
 
+        public Entry(int hash, K key, V value, Entry<K, V> next) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
         public K getKey() {
             return key;
         }
 
         public V getValue() {
             return value;
+        }
+
+        public V setValue(V value) {
+            this.value = value;
+            return this.value;
         }
     }
 
