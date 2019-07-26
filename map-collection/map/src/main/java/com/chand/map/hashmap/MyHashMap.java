@@ -1,4 +1,4 @@
-package com.chand.hashmap;
+package com.chand.map.hashmap;
 
 /**
  * HashMap实现类
