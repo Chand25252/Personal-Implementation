@@ -7,8 +7,8 @@
         <groupId>com.chand</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
     <artifactId>proxy</artifactId>
-
+    <modelVersion>4.0.0</modelVersion>
+    <name>代理</name>
+    <description>代理机制的自定义实现</description>
 </project>
